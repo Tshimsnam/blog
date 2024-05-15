@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\CategorieController;
 use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,6 +16,9 @@ Route::post('/pays',[TestController::class, 'store'])->name('savePays');
 Route::get('/pays', [TestController::class, 'getCountries'])->name('listePays');
 
 Route::get('/pays/create', [TestController::class, 'create'])->name('createPays');
+
+Route::resource('articles', ArticleController::class);
+Route::resource('categories', CategorieController::class);
 
 Route::get('/pays/{id}', [TestController::class, 'showgetCountries'])->name('detailPays');
 
