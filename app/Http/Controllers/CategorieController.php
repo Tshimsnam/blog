@@ -12,7 +12,7 @@ class CategorieController extends Controller
      */
     public function index()
     {
-        $categories = Categorie::all();
+        $categories = Categorie::latest()->get();
 
         return view('categories.index', compact('categories'));
     }
@@ -30,38 +30,69 @@ class CategorieController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        /*$request->validate([
+            'name'=>'required|max:50|min:3|unique:categories',
+            'description'=>'min:10|nullable'
 
+        ]);
+
+        $categorie = new Categorie;
+        $categorie->name = $request->name;
+        $categorie->description = $request->description;
+
+        $categorie->save();
+
+        return redirect()->route("categories.index")->with("success","Enregistrement reussi");
+    }
+*/
+
+$categorie = Categorie::create([
+    'name' => $request->name,
+    'description' => $request->description
+]);
+
+return redirect()->route("categories.index")->with("success","Enregistrement reussi");
+    }
     /**
      * Display the specified resource.
      */
-    public function show(Categorie $categorie)
+    public function show(Categorie $category)
     {
-        //
+        $categorie=$category;
+        return view('categories.show', compact('categorie'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Categorie $categorie)
+    public function edit(Categorie $category)
     {
-        //
+        $categorie=$category;
+        return view('categories.edit', compact('categorie'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Categorie $categorie)
+    public function update(Request $request, Categorie $category)
     {
-        //
+        //dans le cas ou on aurai $id
+
+        //$categorie = Categorie::findOrFail($id);
+        $category->update([
+            'name' => $request->name,
+            'description' => $request->description
+        ]);
+
+        return redirect()->route('categories.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Categorie $categorie)
+    public function destroy(Categorie $category)
     {
-        //
+       //
+        
     }
 }

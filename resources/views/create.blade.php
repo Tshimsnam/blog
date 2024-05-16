@@ -1,3 +1,5 @@
+@extends('layouts.content')
+@section('main-content')
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,10 +13,14 @@
 
     <form action="{{route('savePays')}}" method="post">
         @csrf
-        <p>Nom: <input name="name" type="text"></p>
-        <p>Capital: <input name="capital" type="text"></p>
-        <p><button type="submit">Enregistrer</button></p>
+        <div class="form-group col-md-12 mb-3">
+            <label for="">Name</label>
+            <input class="form-control" type="text" name="name" placeholder="Enter Name" value="">
+            <textarea name="" id="" cols="30" rows="10">Description</textarea>
+            <p><button type="submit"class="btn btn-primary" value="Submit">Enregistrer</button></p>
 
+        </div>
+        
     </form>
 </body>
 </html>
